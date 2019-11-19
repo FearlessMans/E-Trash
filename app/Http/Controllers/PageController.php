@@ -64,13 +64,4 @@ class PageController extends Controller
         return view('pages.typography');
     }
 
-    /**
-     * Display upgrade page
-     *
-     * @return \Illuminate\View\View
-     */
-    public function upgrade()
-    {
-        return view('pages.upgrade');
-    }
 }
