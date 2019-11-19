@@ -8,9 +8,11 @@
     <title>E-Trash</title>
 </head>
 <body>
-    @include('layouts.navbars.navs.user')
-    @yield('content')
-    <hr>
-    @include('layouts.userfooter')
+    <div class="jumbotron">
+        @include('layouts.navbars.navs.user')
+        @yield('content')
+        <hr>
+        @include('layouts.userfooter')
+    </div>
 </body>
 </html>
