@@ -8,6 +8,7 @@
     <title>E-Trash</title>
 </head>
 <body>
-@yield('content')
+    @include('layouts.navbars.navs.user')
+    @yield('content')
 </body>
 </html>
