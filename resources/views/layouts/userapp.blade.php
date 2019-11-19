@@ -10,5 +10,7 @@
 <body>
     @include('layouts.navbars.navs.user')
     @yield('content')
+    <hr>
+    @include('layouts.userfooter')
 </body>
 </html>
