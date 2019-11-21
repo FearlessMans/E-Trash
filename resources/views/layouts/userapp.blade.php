@@ -9,10 +9,10 @@
 </head>
 <body>
     <div class="container bg-black">
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron p-4 p-md-5 rounded">
             @include('layouts.navbars.navs.user')
             @yield('content')
-            <hr>
+            <hr width="1000">
             @include('layouts.userfooter')
         </div>
     </div>
