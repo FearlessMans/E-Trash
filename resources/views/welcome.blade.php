@@ -2,10 +2,11 @@
 
 @section('content')
 
-    <div class="container product">
+<hr width="1000">
+    <div class="container" id="product">
         <div class="header-body text-center mb-7">
             <h1 class="text-black">Product of E-Trash</h1>
-        </div>
+        </div> <br>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -43,7 +44,7 @@
     </div>
 
 <hr width="1000">
-    <div class="container about">
+    <div class="container" id="about">
         <div class="header-body text-center mb-7">
             <div class="row justify-content-center">
                 <div class="col-md-6">

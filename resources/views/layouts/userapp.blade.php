@@ -8,9 +8,10 @@
     <title>E-Trash</title>
 </head>
 <body>
+    <br>
     <div class="container bg-black">
         <div class="jumbotron p-4 p-md-5 rounded">
-            @include('layouts.navbars.navs.user')
+            @include('layouts.navbars.navs.user') <br>
             @yield('content')
             <hr width="1000">
             @include('layouts.userfooter')
