@@ -8,8 +8,8 @@
     <title>E-Trash</title>
 </head>
 <body>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
+    <div class="container bg-black">
+        <div class="jumbotron jumbotron-fluid">
             @include('layouts.navbars.navs.user')
             @yield('content')
             <hr>
