@@ -20,6 +20,11 @@ class CreateTransaksiTable extends Migration
             $table->integer('total_harga');
             $table->integer('jumlah_sampah');
             $table->enum('status', ['Selesai','Belum Selesai']);
+
+            // $table->foreign('id_sampah')->references('id')
+            //         ->on('sampah')
+            //         ->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
