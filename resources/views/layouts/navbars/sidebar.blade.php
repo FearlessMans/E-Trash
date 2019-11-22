@@ -38,7 +38,7 @@
             <li @if ($pageSlug == 'tables') class="active " @endif>
                 <a href="{{ route('pages.tables') }}">
                     <i class="tim-icons icon-puzzle-10"></i>
-                    <p>{{ __('Table List') }}</p>
+                    <p>Transaction</p>
                 </a>
             </li>
         </ul>
