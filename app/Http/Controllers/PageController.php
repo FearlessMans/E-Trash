@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 class PageController extends Controller
 {
+
+    // Starting Admin Section
+
     /**
      * Display tables page
      *
@@ -13,4 +16,10 @@ class PageController extends Controller
     {
         return view('pages.tables');
     }
+
+    // End of Admin Section
+
+    // Starting User Section
+
+    // End of Admin Section
 }
