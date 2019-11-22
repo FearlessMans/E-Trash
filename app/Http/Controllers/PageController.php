@@ -17,6 +17,10 @@ class PageController extends Controller
         return view('pages.tables');
     }
 
+    public function product()
+    {
+        return view('pages.product');
+    }
     // End of Admin Section
 
     // Starting User Section

@@ -41,6 +41,12 @@
                     <p>Transaction</p>
                 </a>
             </li>
+            <li @if ($pageSlug == 'product') class="active " @endif>
+                <a href="{{ route('pages.product') }}">
+                    <i class="tim-icons icon-puzzle-10"></i>
+                    <p>Product</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
