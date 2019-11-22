@@ -1,7 +1,21 @@
 @extends('layouts.userapp')
 
 @section('content')
-
+<hr width="1000">
+    <div class="container" id="transaksi">
+        <div class="header-body text-center mb-7">
+            <h1 class="text-black">Transaction Check</h1>
+            <p>Loosing your transaction? You now can check it here. Dont forget to use your token after you pay it all.</p>
+        </div>
+        <div class="container">
+            <form class="form-inline justify-content-center">
+                <p>
+                    <input class="form-control" type="text" placeholder="Masukkan Token">
+                    <button class="btn btn-primary">Submit</button>
+                </p>
+            </form>
+        </div>
+    </div>
 <hr width="1000">
     <div class="container" id="product">
         <div class="header-body text-center mb-7">

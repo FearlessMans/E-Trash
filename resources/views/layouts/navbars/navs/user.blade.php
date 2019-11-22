@@ -1,7 +1,7 @@
 <nav>
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link" href="#transaction">Transaction Check</a>
+            <a class="nav-link" href="#transaksi">Transaction Check</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#product">Product</a>
