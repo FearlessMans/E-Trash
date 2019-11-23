@@ -23,7 +23,12 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <tr>
+                                <td>{{$product->nama_sampah}}</td>
+                                <td>{{$product->harga}}</td>
+                                <td>{{$product->qty}}</td>
+                                <td><button>Check</button></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
