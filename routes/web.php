@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/shop',['as' => 'user.shop', 'uses' => 'PageController@showProduct']);
+Route::get('/shop',['as' => 'user.product', 'uses' => 'PageController@showProduct']);
 
 Auth::routes();
 
