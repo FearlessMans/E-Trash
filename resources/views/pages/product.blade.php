@@ -10,6 +10,25 @@
                     Inputkan Product
                 </h4>
             </div>
+            <div class="card-body">
+                <form id="Form">
+                    @csrf
+                    @method('POST')
+                    <div class="form-group">
+                        <label>Nama Product</label>
+                        <input type="text" name="nama_sampah" class="form-control" placeholder="Masukkan Nama Product">
+
+                        <label>Banyak Product</label>
+                        <input type="number" name="qty" class="form-control" placeholder="Masukkan Banyaknya Product">
+
+                        <label>Harga Product</label>
+                        <input type="number" name="harga" class="form-control" placeholder="Masukkan Harga Product">
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-fill btn-primary" id="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
         @if(count($product)>0)
             <div class="card">
