@@ -55,7 +55,7 @@
                                         <td>{{$item->harga}}</td>
                                         <td>{{$item->qty}}</td>
                                         <td width="200">
-                                            <button class="btn btn-danger" id="deletion {{$item->id}}" onclick="deletion($item->id)">
+                                            <button class="btn btn-danger" id="deletion_{{$item->id}}" onclick="deletion({{$item->id}})">
                                                 <i class="tim-icons icon-trash-simple"></i>
                                             </button>
                                         </td>
@@ -111,17 +111,21 @@
     });
 
     function deletion(id){
-        if(confirm('Are you sure to delete this record ?')){
+        if(confirm("Are you sure to delete this record ?")){
             $.ajaxSetup({
-                headers:{
+                headers: {
                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                 }
             })
             $.ajax({
-                url:
+                url: `/product/delete/`+id,
                 method: 'delete',
-                data: id,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id" : id
+                },
                 success: function(){
+                    location.reload(),
                     $.notify({
                         icon: "tim-icons icon-bell-55",
                         message: "Product removed."
@@ -134,7 +138,7 @@
                         }
                     });
                 }
-            })
+            });
         }
     }
 </script>

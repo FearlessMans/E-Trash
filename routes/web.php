@@ -21,7 +21,7 @@ Auth::routes();
 
 
 Route::post('/product/add', ['as' => 'post.product', 'uses' => 'ProductsController@store']);
-Route::delete('/product/delete', ['as' => 'delete.product', 'uses' => 'ProductsController@destroy']);
+Route::delete('/product/delete/{id}', ['as' => 'delete.product', 'uses' => 'ProductsController@destroy']);
 
 
 Route::get('/admin', 'HomeController@index')->name('home')->middleware('auth');
