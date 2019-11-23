@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {

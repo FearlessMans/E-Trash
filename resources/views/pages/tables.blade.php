@@ -30,14 +30,14 @@
                         <td><img src="{{asset('storage/transaksi/').$item->picture}}" alt="Transaksi"></td>
                         @endif
                         <td><p class="text-primary">Gambar Belum di Upload</p></td>
+                        <td>{{$item->email_pembeli}}</td>
+                        <td>{{$item->jenis_sampah->nama_sampah}}</td>
+                        <td>{{$item->jumlah_sampah}}</td>
+                        <td>{{$item->tgl_transaksi}}</td>
+                        <td>tgl</td>
+                        <td>{{$item->status}}</td>
+                        <td><button>Click</button></td>
                     </tr>
-                    <tr>{{$item->email_pembeli}}</tr>
-                    <tr>{{$item->jenis_sampah}}</tr>
-                    <tr>{{$item->jumlah_sampah}}</tr>
-                    <tr>{{$item->tgl_transaksi}}</tr>
-                    <tr>{{$item->tgl_expired}}</tr>
-                    <tr>{{$item->status}}</tr>
-                    <tr><button>Click</button></tr>
                     @endforeach
                     </tbody>
                 </table>
