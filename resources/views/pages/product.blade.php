@@ -49,12 +49,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>{{$product->nama_sampah}}</td>
-                                    <td>{{$product->harga}}</td>
-                                    <td>{{$product->qty}}</td>
-                                    <td><button>Check</button></td>
-                                </tr>
+                                @foreach ($product as $item)
+                                    <tr>
+                                        <td>{{$item->nama_sampah}}</td>
+                                        <td>{{$item->harga}}</td>
+                                        <td>{{$item->qty}}</td>
+                                        <td><button>Check</button></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
