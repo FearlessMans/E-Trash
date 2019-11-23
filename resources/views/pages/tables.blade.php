@@ -2,134 +2,55 @@
 
 @section('content')
 <div class="row">
-  <div class="col-md-12">
-    <div class="card ">
-      <div class="card-header">
-        <h4 class="card-title"> Simple Table</h4>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table tablesorter " id="">
-            <thead class=" text-primary">
-              <tr>
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-center">
-                  Salary
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Dakota Rice
-                </td>
-                <td>
-                  Niger
-                </td>
-                <td>
-                  Oud-Turnhout
-                </td>
-                <td class="text-center">
-                  $36,738
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Minerva Hooper
-                </td>
-                <td>
-                  Curaçao
-                </td>
-                <td>
-                  Sinaai-Waas
-                </td>
-                <td class="text-center">
-                  $23,789
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Sage Rodriguez
-                </td>
-                <td>
-                  Netherlands
-                </td>
-                <td>
-                  Baileux
-                </td>
-                <td class="text-center">
-                  $56,142
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Philip Chaney
-                </td>
-                <td>
-                  Korea, South
-                </td>
-                <td>
-                  Overland Park
-                </td>
-                <td class="text-center">
-                  $38,735
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Doris Greene
-                </td>
-                <td>
-                  Malawi
-                </td>
-                <td>
-                  Feldkirchen in Kärnten
-                </td>
-                <td class="text-center">
-                  $63,542
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Mason Porter
-                </td>
-                <td>
-                  Chile
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-center">
-                  $78,615
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Jon Porter
-                </td>
-                <td>
-                  Portugal
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-center">
-                  $98,615
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Table Transaksi</h4>
+            </div>
+            @if (count($transaksi)>0)
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                    <tr>
+                        <th>Gambar</th>
+                        <th>Email Pembeli</th>
+                        <th>Jenis Sampah</th>
+                        <th>Jumlah Sampah</th>
+                        <th>Tanggal Transaksi</th>
+                        <th>Tanggal Expired</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($transaksi as $item)
+                    <tr>
+                        @if ($item->picture != null)
+                        <td><img src="{{asset('storage/transaksi/').$item->picture}}" alt="Transaksi"></td>
+                        @endif
+                        <td><p class="text-primary">Gambar Belum di Upload</p></td>
+                    </tr>
+                    <tr>{{$item->email_pembeli}}</tr>
+                    <tr>{{$item->jenis_sampah}}</tr>
+                    <tr>{{$item->jumlah_sampah}}</tr>
+                    <tr>{{$item->tgl_transaksi}}</tr>
+                    <tr>{{$item->tgl_expired}}</tr>
+                    <tr>{{$item->status}}</tr>
+                    <tr><button>Click</button></tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                </div>
+            </div>
         </div>
-      </div>
+        @else
+        <div class="card-body">
+            <div class="container">
+                <h4 class="text-primary text-center">Data Tidak di Temukan</h4>
+            </div>
+        </div>
+        @endif
     </div>
-  </div>
 </div>
 @endsection

@@ -19,15 +19,14 @@ Route::get('/shop',['as' => 'user.product', 'uses' => 'PageController@showProduc
 
 Auth::routes();
 
-
-Route::post('/product/add', ['as' => 'post.product', 'uses' => 'ProductsController@store']);
-Route::delete('/product/delete/{id}', ['as' => 'delete.product', 'uses' => 'ProductsController@destroy']);
-
-
 Route::get('/admin', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
         Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
         Route::get('product', ['as' => 'pages.product', 'uses' => 'PageController@product']);
+        Route::post('/product/add', ['as' => 'post.product', 'uses' => 'ProductsController@store']);
+        Route::delete('/product/delete/{id}', ['as' => 'delete.product', 'uses' => 'ProductsController@destroy']);
+
+
 });
 
 Route::group(['middleware' => 'auth'], function () {
