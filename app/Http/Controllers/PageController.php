@@ -20,7 +20,7 @@ class PageController extends Controller
         return view('pages.tables');
     }
 
-    public function product(ProductController $product)
+    public function product(ProductsController $product)
     {
         $product = $product->index();
         return view('pages.product', compact('product'));
