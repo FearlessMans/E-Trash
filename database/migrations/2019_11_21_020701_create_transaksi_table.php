@@ -20,13 +20,9 @@ class CreateTransaksiTable extends Migration
             $table->integer('total_harga');
             $table->integer('jumlah_sampah');
             $table->string('token');
-            $table->enum('status', ['Selesai','Belum Selesai']);
-
-            // $table->foreign('id_sampah')->references('id')
-            //         ->on('sampah')
-            //         ->onDelete('cascade')->onUpdate('cascade');
-
-            $table->timestamps();
+            $table->enum('status', ['SELESAI','PENDING', 'EXPIRED'])->default('PENDING');
+            $table->dateTime('tgl_transaksi')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('tgl_expired')->nullable();
         });
     }
 

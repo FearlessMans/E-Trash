@@ -15,13 +15,9 @@ class CreateSampahTable extends Migration
     {
         Schema::create('sampah', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_sampah');
             $table->string('nama_sampah');
             $table->integer('qty');
             $table->integer('harga');
-
-            
-
             $table->timestamps();
         });
     }
