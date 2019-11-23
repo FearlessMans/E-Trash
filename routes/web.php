@@ -20,7 +20,7 @@ Route::get('/shop',['as' => 'user.product', 'uses' => 'PageController@showProduc
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home')->middleware('auth');
-Route::post('/product')
+Route::post('/product/add', ['as' => 'post.product', 'uses' => 'ProductsController@store']);
 Route::group(['middleware' => 'auth'], function () {
         Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
         Route::get('product', ['as' => 'pages.product', 'uses' => 'PageController@product']);

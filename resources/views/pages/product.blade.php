@@ -80,7 +80,26 @@
             let form = document.getElementById('Form');
             let formData = new FormData (form);
             jQuery.ajax({
-                url:
+                url: '/product/add',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(){
+                    document.getElementById("Form").reset();
+                    location.reload();
+                    $.notify({
+                        icon: "tim-icons icon-bell-55",
+                        message: "New Product Added"
+                    },{
+                        type: type['#f6383b'],
+                        timer: 5000,
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        }
+                    })
+                }
             })
         });
     });
