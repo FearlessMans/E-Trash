@@ -14,7 +14,14 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $transaksi = Transaksi::all();
+        foreach($transaksi as $trans){
+            $trans->jenis_sampah = DB::table('sampah')
+                ->select('nama_sampah')
+                ->where('id',$trans->id_sampah)
+                ->first();
+        }
+        return $transaksi;
     }
 
     /**

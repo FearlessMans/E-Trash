@@ -15,9 +15,10 @@ class PageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function tables()
+    public function tables(TransaksiController $transaksi)
     {
-        return view('pages.tables');
+        $transaksi = $transaksi->index();
+        return view('pages.tables', compact('transaksi'));
     }
 
     public function product(ProductsController $product)
