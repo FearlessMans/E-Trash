@@ -54,7 +54,11 @@
                                         <td>{{$item->nama_sampah}}</td>
                                         <td>{{$item->harga}}</td>
                                         <td>{{$item->qty}}</td>
-                                        <td><button>Check</button></td>
+                                        <td width="200">
+                                            <button class="btn btn-danger" id="deletion {{$item->id}}" onclick="deletion($item->id)">
+                                                <i class="tim-icons icon-trash-simple"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -105,5 +109,33 @@
             })
         });
     });
+
+    function deletion(id){
+        if(confirm('Are you sure to delete this record ?')){
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            })
+            $.ajax({
+                url:
+                method: 'delete',
+                data: id,
+                success: function(){
+                    $.notify({
+                        icon: "tim-icons icon-bell-55",
+                        message: "Product removed."
+                    },{
+                        type: type['#f6383b'],
+                        timer: 5000,
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        }
+                    });
+                }
+            })
+        }
+    }
 </script>
 @endsection
