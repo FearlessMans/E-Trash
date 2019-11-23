@@ -27,7 +27,16 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = $request->isMethod('put') ? Product::findOrFail($request->id) : new Product;
+        $product->nama_sampah = $request->nama_sampah;
+        $product->qty = $request->qty;
+        $product->harga = $request->harga;
+
+        if($product->save()){
+            return response()->json([
+                'message'=>'Insert Success'
+            ]);
+        }
     }
 
     /**
