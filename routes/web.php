@@ -14,12 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/shop',['as' => 'user.product', 'uses' => 'PageController@showProduct']);
+
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-		Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
+        Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
+        Route::get('product', ['as' => 'pages.product', 'uses' => 'PageController@product']);
 });
 
 Route::group(['middleware' => 'auth'], function () {
