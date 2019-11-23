@@ -19,6 +19,7 @@ class CreateTransaksiTable extends Migration
             $table->integer('id_sampah');
             $table->integer('total_harga');
             $table->integer('jumlah_sampah');
+            $table->string('token');
             $table->enum('status', ['Selesai','Belum Selesai']);
 
             // $table->foreign('id_sampah')->references('id')
