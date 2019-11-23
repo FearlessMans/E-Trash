@@ -2,6 +2,7 @@
 
 @section('content')
 
+@if($product != null)
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -30,5 +31,9 @@
         </div>
     </div>
 </div>
-
+@else
+<div class="container">
+    <div class="text-center">Maaf Data Kosong</div>
+</div>
+@endif
 @endsection
