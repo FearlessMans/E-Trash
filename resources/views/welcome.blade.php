@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h4 class="card-title">John Doe</h4>
                             <p class="card-text">Some example text.</p>
-                            <a href="#" class="btn btn-primary">See Profile</a>
+                            <a href="{{route('user.product')}}" class="btn btn-primary">See Profile</a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         <div class="card-body">
                             <h4 class="card-title">John Doe</h4>
                             <p class="card-text">Some example text.</p>
-                            <a href="#" class="btn btn-primary">See Profile</a>
+                            <a href="{{route('user.product')}}" class="btn btn-primary">See Profile</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <div class="card-body">
                             <h4 class="card-title">John Doe</h4>
                             <p class="card-text">Some example text.</p>
-                            <a href="#" class="btn btn-primary">See Profile</a>
+                            <a href="{{route('user.product')}}" class="btn btn-primary">See Profile</a>
                         </div>
                     </div>
                 </div>
