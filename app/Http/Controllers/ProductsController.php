@@ -20,16 +20,6 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,7 +27,16 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = $request->isMethod('put') ? Product::findOrFail($request->id) : new Product;
+        $product->nama_sampah = $request->nama_sampah;
+        $product->qty = $request->qty;
+        $product->harga = $request->harga;
+
+        if($product->save()){
+            return response()->json([
+                'message'=>'Insert Success'
+            ]);
+        }
     }
 
     /**
@@ -80,8 +79,13 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if ($product->delete()) {
+            return response()->json([
+                'message' => 'Delete Success'
+            ]);
+        }
     }
 }
