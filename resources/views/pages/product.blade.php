@@ -70,8 +70,18 @@
 
 <script>
     jQuery(document).ready(function(){
-        jQuery('#submit').click(function(){
-
+        jQuery('#submit').click(function(e){
+            e.preventDefault();
+            $.ajaxSetup({
+                headers : {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            let form = document.getElementById('Form');
+            let formData = new FormData (form);
+            jQuery.ajax({
+                url:
+            })
         });
     });
 </script>
