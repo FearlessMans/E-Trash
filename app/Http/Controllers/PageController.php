@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\Transaksi;
+
 class PageController extends Controller
 {
 
@@ -17,9 +20,10 @@ class PageController extends Controller
         return view('pages.tables');
     }
 
-    public function product()
+    public function product(ProductController $product)
     {
-        return view('pages.product');
+        $product = $product->index();
+        return view('pages.product', compact('product'));
     }
     // End of Admin Section
 
