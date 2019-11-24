@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
@@ -88,5 +89,16 @@ class TransaksiController extends Controller
     public function destroy(Transaksi $transaksi)
     {
         //
+    }
+
+    public function status(Request $request)
+    {
+        $transaksi = Transaksi::findOrFail($request->input('id'));
+        $transaksi->status = $request->input('status');
+        if($transaksi->save()){
+            return response()->json([
+                'message' => 'Delete Success'
+            ]);
+        }
     }
 }

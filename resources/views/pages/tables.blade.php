@@ -30,14 +30,23 @@
                         <td><img src="{{asset('storage/transaksi/').$item->picture}}" alt="Transaksi"></td>
                         @endif
                         <td><p class="text-primary">Gambar Belum di Upload</p></td>
+                        <td>{{$item->email_pembeli}}</td>
+                        <td>{{$item->jenis_sampah->nama_sampah}}</td>
+                        <td>{{$item->jumlah_sampah}}</td>
+                        <td>{{$item->tgl_transaksi}}</td>
+                        <td>{{$item->tgl_expired}}</td>
+                        <td>{{$item->status}}</td>
+                        <td width="270">
+                            <button class="btn btn-primary" @if (strcasecmp($item->status, "SELESAI"))
+                                @else
+                                    disabled
+                                @endif onclick="done({{$item->id}})">Valid</button>
+                            <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED"))
+                                @else
+                                    disabled
+                                @endif onclick="expired({{$item->id}})">Invalid</button>
+                        </td>
                     </tr>
-                    <tr>{{$item->email_pembeli}}</tr>
-                    <tr>{{$item->jenis_sampah}}</tr>
-                    <tr>{{$item->jumlah_sampah}}</tr>
-                    <tr>{{$item->tgl_transaksi}}</tr>
-                    <tr>{{$item->tgl_expired}}</tr>
-                    <tr>{{$item->status}}</tr>
-                    <tr><button>Click</button></tr>
                     @endforeach
                     </tbody>
                 </table>
@@ -53,4 +62,70 @@
         @endif
     </div>
 </div>
+
+<script>
+
+function done($id){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    })
+    $.ajax({
+        url: `/transaction/update`,
+        method: 'POST',
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "status" : "SELESAI",
+            "id" : $id
+        },
+        success: function(){
+            location.reload(),
+            $.notify({
+                icon: "tim-icons icon-bell-55",
+                message: "Product removed."
+            },{
+                type: type['#f6383b'],
+                timer: 5000,
+                placement: {
+                    from: 'top',
+                    align: 'center'
+                }
+            });
+        }
+    });
+}
+
+function expired($id){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    })
+    $.ajax({
+        url: `/transaction/update`,
+        method: 'POST',
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "status" : "EXPIRED",
+            "id" : $id
+        },
+        success: function(){
+            location.reload(),
+            $.notify({
+                icon: "tim-icons icon-bell-55",
+                message: "Product removed."
+            },{
+                type: type['#f6383b'],
+                timer: 5000,
+                placement: {
+                    from: 'top',
+                    align: 'center'
+                }
+            });
+        }
+    });
+}
+
+</script>
 @endsection
