@@ -40,11 +40,11 @@
                             <button class="btn btn-primary" @if (strcasecmp($item->status, "SELESAI"))
                                 @else
                                     disabled
-                                @endif>Valid</button>
+                                @endif onclick="done({{$item->id}})">Valid</button>
                             <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED"))
                                 @else
                                     disabled
-                                @endif>Invalid</button>
+                                @endif onclick="expired({{$item->id}})">Invalid</button>
                         </td>
                     </tr>
                     @endforeach
@@ -62,4 +62,39 @@
         @endif
     </div>
 </div>
+
+<script>
+
+function done($id){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    })
+    $.ajax({
+        url: `/transaction/update`,
+        method: 'put',
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "status" : "SELESAI",
+            "id" : $id
+        },
+        success: function(){
+            location.reload(),
+            $.notify({
+                icon: "tim-icons icon-bell-55",
+                message: "Product removed."
+            },{
+                type: type['#f6383b'],
+                timer: 5000,
+                placement: {
+                    from: 'top',
+                    align: 'center'
+                }
+            });
+        }
+    });
+}
+
+</script>
 @endsection
