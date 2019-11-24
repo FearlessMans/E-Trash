@@ -36,15 +36,15 @@
                         <td>{{$item->tgl_transaksi}}</td>
                         <td>{{$item->tgl_expired}}</td>
                         <td>{{$item->status}}</td>
-                        <td width="260">
-                            <button class="btn btn-primary" @if (strcasecmp($item->status, "SELESAI") || strcasecmp($item->status, "EXPIRED"))
-                                disabled
+                        <td width="270">
+                            <button class="btn btn-primary" @if (strcasecmp($item->status, "SELESAI"))
                                 @else
-                            @endif>Valid</button>
-                            <button class="btn btn-danger" @if (strcasecmp($item->status, "SELESAI") || strcasecmp($item->status, "EXPIRED"))
-                                disabled
+                                    disabled
+                                @endif>Valid</button>
+                            <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED"))
                                 @else
-                            @endif>Tolak</button>
+                                    disabled
+                                @endif>Invalid</button>
                         </td>
                     </tr>
                     @endforeach
