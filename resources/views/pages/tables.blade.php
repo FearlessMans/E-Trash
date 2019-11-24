@@ -40,7 +40,7 @@
                             <button class="btn btn-primary" @if (strcasecmp($item->status, "SELESAI"))
                                 @else
                                     disabled
-                                @endif onclick="done({{$item->id}})">Valid</button>
+                                @endif onclick="done({{$item->id}}, {{$item->jumlah_sampah}}, {{$item->id_sampah}})">Valid</button>
                             <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED"))
                                 @else
                                     disabled
@@ -65,7 +65,7 @@
 
 <script>
 
-function done($id){
+function done($id, $jumlah_sampah, $id_sampah){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -77,7 +77,9 @@ function done($id){
         data: {
             "_token": "{{ csrf_token() }}",
             "status" : "SELESAI",
-            "id" : $id
+            "id" : $id,
+            "jumlah_sampah" : $jumlah_sampah,
+            "id_sampah" : $id_sampah
         },
         success: function(){
             location.reload(),
