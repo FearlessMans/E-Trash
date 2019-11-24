@@ -96,5 +96,36 @@ function done($id){
     });
 }
 
+function expired($id){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    })
+    $.ajax({
+        url: `/transaction/update`,
+        method: 'POST',
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "status" : "EXPIRED",
+            "id" : $id
+        },
+        success: function(){
+            location.reload(),
+            $.notify({
+                icon: "tim-icons icon-bell-55",
+                message: "Product removed."
+            },{
+                type: type['#f6383b'],
+                timer: 5000,
+                placement: {
+                    from: 'top',
+                    align: 'center'
+                }
+            });
+        }
+    });
+}
+
 </script>
 @endsection
