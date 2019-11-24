@@ -32,7 +32,7 @@
                         <td><p class="text-primary">Gambar Belum di Upload</p></td>
                         <td>{{$item->email_pembeli}}</td>
                         <td>{{$item->jenis_sampah->nama_sampah}}</td>
-                        <td>{{$item->jumlah_sampah}}</td>
+                        <td>{{$item->jumlah_sampah}} <small>Kg</small></td>
                         <td>{{$item->tgl_transaksi}}</td>
                         <td>{{$item->tgl_expired}}</td>
                         <td>{{$item->status}}</td>
@@ -41,7 +41,7 @@
                                 @else
                                     disabled
                                 @endif onclick="done({{$item->id}}, {{$item->jumlah_sampah}}, {{$item->id_sampah}})">Valid</button>
-                            <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED"))
+                            <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED") && (strcasecmp($item->status, "SELESAI")))
                                 @else
                                     disabled
                                 @endif onclick="expired({{$item->id}})">Invalid</button>

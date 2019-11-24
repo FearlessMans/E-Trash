@@ -53,7 +53,7 @@
                                     <tr>
                                         <td>{{$item->nama_sampah}}</td>
                                         <td>{{$item->harga}}</td>
-                                        <td>{{$item->qty}}</td>
+                                        <td>{{$item->qty}} <small>Kg</small></td>
                                         <td width="200">
                                             <button class="btn btn-danger" id="deletion_{{$item->id}}" onclick="deletion({{$item->id}})">
                                                 <i class="tim-icons icon-trash-simple"></i>
