@@ -32,7 +32,7 @@
                         <td><p class="text-primary">Gambar Belum di Upload</p></td>
                         <td>{{$item->email_pembeli}}</td>
                         <td>{{$item->jenis_sampah->nama_sampah}}</td>
-                        <td>{{$item->jumlah_sampah}}</td>
+                        <td>{{$item->jumlah_sampah}} <small>Kg</small></td>
                         <td>{{$item->tgl_transaksi}}</td>
                         <td>{{$item->tgl_expired}}</td>
                         <td>{{$item->status}}</td>
@@ -40,8 +40,8 @@
                             <button class="btn btn-primary" @if (strcasecmp($item->status, "SELESAI"))
                                 @else
                                     disabled
-                                @endif onclick="done({{$item->id}})">Valid</button>
-                            <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED"))
+                                @endif onclick="done({{$item->id}}, {{$item->jumlah_sampah}}, {{$item->id_sampah}})">Valid</button>
+                            <button class="btn btn-danger" @if (strcasecmp($item->status, "EXPIRED") && (strcasecmp($item->status, "SELESAI")))
                                 @else
                                     disabled
                                 @endif onclick="expired({{$item->id}})">Invalid</button>
@@ -65,7 +65,7 @@
 
 <script>
 
-function done($id){
+function done($id, $jumlah_sampah, $id_sampah){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -77,7 +77,9 @@ function done($id){
         data: {
             "_token": "{{ csrf_token() }}",
             "status" : "SELESAI",
-            "id" : $id
+            "id" : $id,
+            "jumlah_sampah" : $jumlah_sampah,
+            "id_sampah" : $id_sampah
         },
         success: function(){
             location.reload(),

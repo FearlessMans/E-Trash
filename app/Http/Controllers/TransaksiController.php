@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Transaksi;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -94,11 +95,26 @@ class TransaksiController extends Controller
     public function status(Request $request)
     {
         $transaksi = Transaksi::findOrFail($request->input('id'));
-        $transaksi->status = $request->input('status');
-        if($transaksi->save()){
-            return response()->json([
-                'message' => 'Delete Success'
-            ]);
+        switch($request->input('status')){
+            case 'SELESAI' :
+                DB::table('sampah')
+                    ->where('id',$request->input('id_sampah'))
+                    ->decrement('qty', $request->input('jumlah_sampah'));
+                $transaksi->status = $request->input('status');
+                if($transaksi->save()){
+                    return response()->json([
+                        'message' => 'Delete Success'
+                    ]);
+                }
+                break;
+            case 'EXPIRED' :
+                $transaksi->status = $request->input('status');
+                if($transaksi->save()){
+                    return response()->json([
+                        'message' => 'Delete Success'
+                    ]);
+                }
+                break;
         }
     }
 }
