@@ -34,9 +34,18 @@
                         <td>{{$item->jenis_sampah->nama_sampah}}</td>
                         <td>{{$item->jumlah_sampah}}</td>
                         <td>{{$item->tgl_transaksi}}</td>
-                        <td>tgl</td>
+                        <td>{{$item->tgl_expired}}</td>
                         <td>{{$item->status}}</td>
-                        <td><button>Click</button></td>
+                        <td width="260">
+                            <button class="btn btn-primary" @if (strcasecmp($item->status, "SELESAI") || strcasecmp($item->status, "EXPIRED"))
+                                disabled
+                                @else
+                            @endif>Valid</button>
+                            <button class="btn btn-danger" @if (strcasecmp($item->status, "SELESAI") || strcasecmp($item->status, "EXPIRED"))
+                                disabled
+                                @else
+                            @endif>Tolak</button>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>
