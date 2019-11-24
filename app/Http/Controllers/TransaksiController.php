@@ -91,10 +91,10 @@ class TransaksiController extends Controller
         //
     }
 
-    public function status($id, $status)
+    public function status(Request $request)
     {
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->status = $status;
+        $transaksi = Transaksi::findOrFail($request->input('id'));
+        $transaksi->status = $request->input('status');
         if($transaksi->save()){
             return response()->json([
                 'message' => 'Delete Success'

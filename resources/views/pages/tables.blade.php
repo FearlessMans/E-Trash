@@ -73,7 +73,7 @@ function done($id){
     })
     $.ajax({
         url: `/transaction/update`,
-        method: 'put',
+        method: 'POST',
         data: {
             "_token": "{{ csrf_token() }}",
             "status" : "SELESAI",

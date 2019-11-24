@@ -25,8 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('product', ['as' => 'pages.product', 'uses' => 'PageController@product']);
         Route::post('/product/add', ['as' => 'post.product', 'uses' => 'ProductsController@store']);
         Route::delete('/product/delete/{id}', ['as' => 'delete.product', 'uses' => 'ProductsController@destroy']);
-
-
+        Route::post('/transaction/update', ['as' => 'transaction.update', 'uses' => 'TransaksiController@status']);
 });
 
 Route::group(['middleware' => 'auth'], function () {
