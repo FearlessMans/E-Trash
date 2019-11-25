@@ -36,9 +36,10 @@ class PageController extends Controller
         return view ('welcome', compact('product'));
     }
 
-    public function showProduct()
+    public function showProduct(ProductsController $product, $id)
     {
-        return view('pages.userProduct');
+        $product = $product->show($id);
+        return view('pages.userProduct', compact('product'));
     }
 
     // End of Admin Section
