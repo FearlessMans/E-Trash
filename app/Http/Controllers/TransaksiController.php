@@ -27,16 +27,6 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -44,7 +34,10 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $transaksi = $request->isMethod('put') ? Transaksi::findOrFail($request->id) : new Transaksi;
+        $transaksi->email_pembeli = $request->email_pembeli;
+        $transaksi->id_sampah = $request->id_sampah;
+        $transaksi->
     }
 
     /**

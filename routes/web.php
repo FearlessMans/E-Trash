@@ -16,6 +16,7 @@ Route::get('/', ['as' => 'home' , 'uses' => 'PageController@home']);
 
 Route::get('/shop/{id}',['as' => 'user.product', 'uses' => 'PageController@showProduct']);
 Route::post('/product/track', ['as' => 'transaction.track', 'uses' => 'TransaksiController@track']);
+Route::post('/transact/add', ['as' => 'transaction.add', 'uses' => 'TransaksiController@store']);
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home')->middleware('auth');

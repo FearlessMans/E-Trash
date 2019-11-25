@@ -28,12 +28,25 @@
 <script>
     function kumpul(id, stock){
         let jumlah_sampah = $("input[name=jumlah_sampah]").val();
+        let email_pembeli = $("input[name=email_pembeli").val();
         if(stock >= jumlah_sampah){
-            $("#result").modal({
-                fadeDuration: 250,
-                showClose: true,
-                showSpinner: true,
-            });
+            $.ajaxSetup({
+                headers : {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            })
+            jQuery.ajax({
+                url: `/transact/add`,
+                method: 'Post',
+                data: {
+                    "jumlah_sampah" : $jumlah_sampah,
+                    "email_pembeli" : $email_pembeli,
+                    "id_sampah" : $id
+                },
+                success: function(){
+                    console.log("Success")
+                }
+            })
         }else{
         $.notify({
                 style: "error",
@@ -49,3 +62,9 @@
     }
 </script>
 @endsection
+
+$("#result").modal({
+    fadeDuration: 250,
+    showClose: true,
+    showSpinner: true,
+});
