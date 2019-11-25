@@ -123,7 +123,7 @@ class TransaksiController extends Controller
                 ->select('status')
                 ->where('token', $request->tok)
                 ->first();
-            return response()->json($trans);
+            return json_encode($trans);
 
         // switch($request->input('status')){
         //     case 'SELESAI' :
