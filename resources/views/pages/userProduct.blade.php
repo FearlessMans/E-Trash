@@ -19,11 +19,21 @@
     <button class="btn btn-primary" id="{{$product->id}}" onclick="kumpul({{$product->id}}, {{$product->qty}})">Checkout</button>
 </div>
 
+<div class="modal" id="result">
+    <div class="container">
+        <h1>Tolong simpan token ini baik baik!</h1>
+    </div>
+</div>
+
 <script>
     function kumpul(id, stock){
         let jumlah_sampah = $("input[name=jumlah_sampah]").val();
         if(stock >= jumlah_sampah){
-            console.log("Stock Lebih besar")
+            $("#result").modal({
+                fadeDuration: 250,
+                showClose: true,
+                showSpinner: true,
+            });
         }else{
         $.notify({
                 style: "error",
