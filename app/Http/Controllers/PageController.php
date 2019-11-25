@@ -30,9 +30,17 @@ class PageController extends Controller
 
     // Starting User Section
 
-    public function showProduct()
+    public function home(ProductsController $product)
     {
-        return view('pages.userProduct');
+        $product = $product->index();
+        return view ('welcome', compact('product'));
     }
+
+    public function showProduct(ProductsController $product)
+    {
+        $product = $product->index();
+        return view('pages.userProduct', compact('product'));
+    }
+
     // End of Admin Section
 }

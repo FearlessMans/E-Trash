@@ -23,36 +23,17 @@
         </div> <br>
         <div class="container">
             <div class="row">
+                @foreach ($product as $item)
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img class="card-img-top" src="img_avatar1.png" alt="Card image">
                         <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text.</p>
-                            <a href="{{route('user.product')}}" class="btn btn-primary">See Profile</a>
+                            <h4 class="card-title">{{$item->nama_sampah}}</h4>
+                            <p class="card-text">Jumlah saat ini : {{$item->qty}} <small>Kg</small></p>
+                            <a href="{{route('user.product')}}" class="btn btn-primary">Beli</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow sm">
-                        <img class="card-img-top" src="img_avatar1.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text.</p>
-                            <a href="{{route('user.product')}}" class="btn btn-primary">See Profile</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow sm">
-                        <img class="card-img-top" src="img_avatar1.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text.</p>
-                            <a href="{{route('user.product')}}" class="btn btn-primary">See Profile</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -69,5 +50,4 @@
             </div>
         </div>
     </div>
-
 @endsection
