@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/shop',['as' => 'user.product', 'uses' => 'PageController@showProduct']);
-
+Route::post('/product/track', ['as' => 'transaction.track', 'uses' => 'TransaksiController@track']);
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home')->middleware('auth');
@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/product/add', ['as' => 'post.product', 'uses' => 'ProductsController@store']);
         Route::delete('/product/delete/{id}', ['as' => 'delete.product', 'uses' => 'ProductsController@destroy']);
         Route::post('/transaction/update', ['as' => 'transaction.update', 'uses' => 'TransaksiController@status']);
+        
 });
 
 Route::group(['middleware' => 'auth'], function () {
