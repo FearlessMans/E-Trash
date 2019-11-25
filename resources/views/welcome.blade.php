@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{$item->nama_sampah}}</h4>
                             <p class="card-text">Jumlah saat ini : {{$item->qty}} <small>Kg</small></p>
-                            <a href="{{route('user.product')}}" class="btn btn-primary">Beli</a>
+                            <a href="{{url('/shop/'.$item->id)}}" class="btn btn-primary">Beli</a>
                         </div>
                     </div>
                 </div>

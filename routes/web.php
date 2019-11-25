@@ -13,7 +13,7 @@
 
 Route::get('/', ['as' => 'home' , 'uses' => 'PageController@home']);
 
-Route::get('/shop',['as' => 'user.product', 'uses' => 'PageController@showProduct']);
+Route::get('/shop/{id}',['as' => 'user.product', 'uses' => 'PageController@showProduct']);
 
 Auth::routes();
 
