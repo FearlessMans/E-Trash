@@ -8,12 +8,16 @@
             <p>Loosing your transaction? You now can check it here. Dont forget to use your token after you pay it all.</p>
         </div>
         <div class="container">
-            <form class="form-inline justify-content-center">
+            <form class="form-inline justify-content-center" id="Form" >
                 <p>
-                    <input class="form-control" type="text" placeholder="Masukkan Token">
-                    <button class="btn btn-primary">Submit</button>
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <input class="form-control" type="text" name="tok" placeholder="Masukkan Token">
+                    <button class="btn btn-primary" id = "submit">Submit</button>
                 </p>
             </form>
+        </div>
+        <div class="container" id="showing_case">
+
         </div>
     </div>
 <hr width="1000">
@@ -50,4 +54,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+    jQuery(document).ready(function(){
+        jQuery('#submit').click(function(e){
+            e.preventDefault();
+            $.ajaxSetup({
+                headers : {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            let form = document.getElementById('Form');
+            let formData = new FormData (form);
+            jQuery.ajax({
+                url: 'product/track',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: (response)=>{
+                    const data = JSON.parse(response);
+                    data.forEach(function(item){
+                        console.log(item.status)
+                    })
+                }
+                })
+            })
+        });
+
+</script>
+
 @endsection
