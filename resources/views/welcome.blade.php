@@ -54,7 +54,6 @@
             </div>
         </div>
     </div>
-
     <script>
     jQuery(document).ready(function(){
         jQuery('#submit').click(function(e){
@@ -73,17 +72,13 @@
                 processData: false,
                 contentType: false,
                 success: (response)=>{
-                    const data = JSON.parse(response)
-                    console.log(data.status)
-                    // const data = response;
-                    // data.forEach(function(item){
-                    //     console.log(item.status)
-                    // })
+                    const data = JSON.parse(response);
+                    data.forEach(function(item){
+                        console.log(item.status)
+                    })
                 }
                 })
             })
         });
-
 </script>
-
 @endsection
