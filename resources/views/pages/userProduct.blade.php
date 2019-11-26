@@ -20,8 +20,8 @@
 </div>
 
 <div class="modal" id="result">
-    <div class="container">
-        <h1>Tolong simpan token ini baik baik!</h1>
+    <div class="container" id="konten">
+
     </div>
 </div>
 
@@ -46,7 +46,19 @@
                 },
                 success: function(response){
                     const data = JSON.parse(response)
-                    console.log(data);
+                    HTML =
+                        '<h3>Gunakan token ini untuk membayar ke rek: 421-231-234-2(BCA)!</h3>' + data.token +
+                        '<hr>'+
+                        '<p>Dengan Jumlah : ' + data.total_harga + ', Sebelum</p>' +
+                        '<br>'+
+                        '<p>'+ data.tgl_expired +'</p>' +
+                        '<a href="/" class="btn btn-primary">Home</a>'
+                    $('#konten').append(HTML).delay(500),
+                    $("#result").modal({
+                        fadeDuration: 250,
+                        showClose: false,
+                        showSpinner: true,
+                    });
                 }
             })
         }else{
@@ -64,9 +76,3 @@
     }
 </script>
 @endsection
-
-$("#result").modal({
-    fadeDuration: 250,
-    showClose: true,
-    showSpinner: true,
-});

@@ -51,7 +51,8 @@ class TransaksiController extends Controller
             return json_encode([
                 "message" => "Save Success",
                 "token" => $transaksi->token,
-                "tgl_expired" => $transaksi->tgl_expired->toDateTimeString()." (".$transaksi->tgl_expired->diffForHumans().")"
+                "tgl_expired" => $transaksi->tgl_expired->toDateTimeString()." (".$transaksi->tgl_expired->diffForHumans().")",
+                "total_harga" => number_format($transaksi->total_harga, 2)
             ]);
         }
     }
