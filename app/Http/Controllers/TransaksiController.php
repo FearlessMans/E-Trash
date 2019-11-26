@@ -46,12 +46,12 @@ class TransaksiController extends Controller
         $transaksi->total_harga = $total->harga * $request->jumlah_sampah;
         $transaksi->jumlah_sampah = $request->jumlah_sampah;
         $transaksi->token = Str::random(40);
-        $transaksi->tgl_expired = Carbon::tomorrow();
+        $transaksi->tgl_expired = Carbon::now()->addDays(1)->setTimezone('Asia/Jakarta');
         if($transaksi->save()){
-            return response()->json([
+            return json_encode([
                 "message" => "Save Success",
                 "token" => $transaksi->token,
-                "tgl_expired" => $transaksi->tgl_expired
+                "tgl_expired" => $transaksi->tgl_expired->toDateTimeString()." (".$transaksi->tgl_expired->diffForHumans().")"
             ]);
         }
     }
