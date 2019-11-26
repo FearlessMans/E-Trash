@@ -78,11 +78,12 @@
                     const data = JSON.parse(response)
                     if(data.status === "PENDING"){
                         HTML =
-                        '<p><b><small style="color:orange">'+data.status+'</small></b></p>'
+                        '<p><b><small style="color:orange">'+data.status+'</small></b></p>' +
+
                         $('#hasil').append(HTML)
                         setTimeout(function(){
                             $('#hasil').html("")
-                        },3000)
+                        },6000)
                     }else if(data.status === "EXPIRED"){
                         HTML =
                         '<p><small style="color:red">'+data.status+'</small></p>'
