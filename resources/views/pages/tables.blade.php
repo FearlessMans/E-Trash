@@ -16,7 +16,7 @@
                         <th>Gambar</th>
                         <th>Email Pembeli</th>
                         <th>Jenis Sampah</th>
-                        <th>Jumlah Sampah</th>
+                        <th>Total Harga</th>
                         <th>Tanggal Transaksi</th>
                         <th>Tanggal Expired</th>
                         <th>Status</th>
@@ -32,7 +32,7 @@
                         <td><p class="text-primary">Gambar Belum di Upload</p></td>
                         <td>{{$item->email_pembeli}}</td>
                         <td>{{$item->jenis_sampah->nama_sampah}}</td>
-                        <td>{{$item->jumlah_sampah}} <small>Kg</small></td>
+                        <td><small>Rp.</small>{{$item->total_harga}}</td>
                         <td>{{$item->tgl_transaksi}}</td>
                         <td>{{$item->tgl_expired}}</td>
                         <td>{{$item->status}}</td>
