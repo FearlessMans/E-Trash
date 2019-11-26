@@ -15,6 +15,9 @@
                     <button class="btn btn-primary" id = "submit">Submit</button>
                 </p>
             </form>
+            <div class="text-center" id="hasil">
+
+            </div>
         </div>
         <div class="container" id="showing_case">
 
@@ -73,9 +76,25 @@
                 contentType: false,
                 success: (response)=>{
                     const data = JSON.parse(response);
-                    data.forEach(function(item){
-                        console.log(item.status)
-                    })
+                    if(data.status === "null"){
+                        $('#hasil').html("")
+                    }else if(data.status === "EXPIRED"){
+                        HTML =
+                        '<p><small style="color:red">'+data.status+'</small></p>'
+                        $('#hasil').append(HTML)
+                        setTimeout(function(){
+                            $('#hasil').html("")
+                        },3000)
+                    }else if(data.status === "SELESAI"){
+                        HTML =
+                        '<p><small style="color:green">'+data.status+'</small></p>'
+                        $('#hasil').append(HTML)
+                        setTimeout(function(){
+                            $('#hasil').html("")
+                        },3000)
+                    }else{
+                        console.log(data.status)
+                    }
                 }
                 })
             })

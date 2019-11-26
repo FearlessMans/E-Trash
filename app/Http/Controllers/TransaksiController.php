@@ -133,7 +133,13 @@ class TransaksiController extends Controller
                 ->select('status')
                 ->where('token', $request->tok)
                 ->first();
-            return json_encode($trans);
+            if($trans === null){
+                return json_encode([
+                    'status' => 'null'
+                ]);
+            }else{
+                return json_encode($trans);
+            }
     }
 
 }
