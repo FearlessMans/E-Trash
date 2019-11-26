@@ -75,9 +75,14 @@
                 processData: false,
                 contentType: false,
                 success: (response)=>{
-                    const data = JSON.parse(response);
-                    if(data.status === "null"){
-                        $('#hasil').html("")
+                    const data = JSON.parse(response)
+                    if(data.status === "PENDING"){
+                        HTML =
+                        '<p><b><small style="color:orange">'+data.status+'</small></b></p>'
+                        $('#hasil').append(HTML)
+                        setTimeout(function(){
+                            $('#hasil').html("")
+                        },3000)
                     }else if(data.status === "EXPIRED"){
                         HTML =
                         '<p><small style="color:red">'+data.status+'</small></p>'
@@ -93,7 +98,12 @@
                             $('#hasil').html("")
                         },3000)
                     }else{
-                        console.log(data.status)
+                        HTML =
+                        '<p><small>Token Anda Salah!</small></p>'
+                        $('#hasil').append(HTML)
+                        setTimeout(function(){
+                            $('#hasil').html("")
+                        },3000)
                     }
                 }
                 })
