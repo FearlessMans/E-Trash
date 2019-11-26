@@ -85,7 +85,7 @@ class TransaksiController extends Controller
 
     function track (Request $request){
         $trans = DB::table('transaksi')
-                ->select('status')
+                ->select('status', 'picture', 'id')
                 ->where('token', $request->tok)
                 ->first();
             if($trans === null){

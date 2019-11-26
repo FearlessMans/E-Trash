@@ -77,13 +77,22 @@
                 success: (response)=>{
                     const data = JSON.parse(response)
                     if(data.status === "PENDING"){
-                        HTML =
-                        '<p><b><small style="color:orange">'+data.status+'</small></b></p>' +
-
-                        $('#hasil').append(HTML)
-                        setTimeout(function(){
-                            $('#hasil').html("")
-                        },6000)
+                        if(data.picture === null){
+                            HTML =
+                                '<p><b><small style="color:orange">Anda belum membayar dan data anda '+data.status+'</small></b></p>' +
+                                '<button class="btn btn-primary" onclick="update('+data.id+')">Update</button>'
+                                $('#hasil').append(HTML)
+                            setTimeout(function(){
+                                $('#hasil').html("")
+                            },6000)
+                        }else{
+                            HTML =
+                                '<p><b><small style="color:orange">Data anda lengkap dan dalam status '+data.status+'</small></b></p>' +
+                                $('#hasil').append(HTML)
+                            setTimeout(function(){
+                                $('#hasil').html("")
+                            },3000)
+                        }
                     }else if(data.status === "EXPIRED"){
                         HTML =
                         '<p><small style="color:red">'+data.status+'</small></p>'
