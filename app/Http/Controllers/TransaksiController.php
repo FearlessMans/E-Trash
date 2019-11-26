@@ -134,28 +134,6 @@ class TransaksiController extends Controller
                 ->where('token', $request->tok)
                 ->first();
             return json_encode($trans);
-
-        // switch($request->input('status')){
-        //     case 'SELESAI' :
-        //         DB::table('sampah')
-        //             ->where('id',$request->input('id_sampah'))
-        //             ->decrement('qty', $request->input('jumlah_sampah'));
-        //         $transaksi->status = $request->input('status');
-        //         if($transaksi->save()){
-        //             return response()->json([
-        //                 'message' => 'Delete Success'
-        //             ]);
-        //         }
-        //         break;
-        //     case 'EXPIRED' :
-        //         $transaksi->status = $request->input('status');
-        //         if($transaksi->save()){
-        //             return response()->json([
-        //                 'message' => 'Delete Success'
-        //             ]);
-        //         }
-        //         break;
-        // }
     }
 
 }
