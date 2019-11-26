@@ -58,6 +58,8 @@
                         fadeDuration: 250,
                         showClose: false,
                         showSpinner: true,
+                        escapeClose: false,
+                        clickClose: false,
                     });
                 }
             })

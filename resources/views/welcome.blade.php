@@ -57,6 +57,19 @@
             </div>
         </div>
     </div>
+    <div class="container modal" id="result">
+        <div class="modal-header">
+            <h4 class="modal-title w-100 text-center">Silahkan upload bukti transfer</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="picture">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </form>
+        </div>
+    </div>
     <script>
     jQuery(document).ready(function(){
         jQuery('#submit').click(function(e){
@@ -118,6 +131,23 @@
                 }
                 })
             })
+            $('#inputGroupFile01').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                fileName = fileName.substring(fileName.lastIndexOf("\\")+1, fileName.length);
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
         });
-</script>
+
+        function update(id){
+            $("#result").modal({
+                fadeDuration: 250,
+                showClose: false,
+                showSpinner: true,
+                escapeClose: true,
+                clickClose: false,
+            });
+        }
+    </script>
 @endsection
