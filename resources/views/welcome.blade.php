@@ -23,7 +23,7 @@
 <hr width="1000">
     <div class="container" id="product">
         <div class="header-body text-center mb-7">
-            <h1 class="text-black">Product of E-Trash</h1>
+            <h1 class="text-black">Product E-Trash</h1>
         </div> <br>
         <div class="container">
             <div class="row">

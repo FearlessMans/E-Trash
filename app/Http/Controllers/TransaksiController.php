@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Transaksi;
 use App\Product;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,16 +29,6 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -44,7 +36,25 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $total = DB::table('sampah')
+            ->select('harga')
+            ->where('id', $request->id_sampah)
+            ->first();
+        $transaksi = $request->isMethod('put') ? Transaksi::findOrFail($request->id) : new Transaksi;
+        $transaksi->email_pembeli = $request->email_pembeli;
+        $transaksi->id_sampah = $request->id_sampah;
+        $transaksi->total_harga = $total->harga * $request->jumlah_sampah;
+        $transaksi->jumlah_sampah = $request->jumlah_sampah;
+        $transaksi->token = Str::random(40);
+        $transaksi->tgl_expired = Carbon::now()->addDays(1)->setTimezone('Asia/Jakarta');
+        if($transaksi->save()){
+            return json_encode([
+                "message" => "Save Success",
+                "token" => $transaksi->token,
+                "tgl_expired" => $transaksi->tgl_expired->toDateTimeString()." (".$transaksi->tgl_expired->diffForHumans().")",
+                "total_harga" => number_format($transaksi->total_harga, 2)
+            ]);
+        }
     }
 
     /**
