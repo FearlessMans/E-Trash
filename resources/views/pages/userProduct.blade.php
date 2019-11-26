@@ -39,12 +39,14 @@
                 url: `/transact/add`,
                 method: 'Post',
                 data: {
-                    "jumlah_sampah" : $jumlah_sampah,
-                    "email_pembeli" : $email_pembeli,
-                    "id_sampah" : $id
+                    "_token": "{{ csrf_token() }}",
+                    "jumlah_sampah" : jumlah_sampah,
+                    "email_pembeli" : email_pembeli,
+                    "id_sampah" : id
                 },
-                success: function(){
-                    console.log("Success")
+                success: function(response){
+                    const data = JSON.parse(response)
+                    console.log(data);
                 }
             })
         }else{
