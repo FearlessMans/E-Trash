@@ -57,51 +57,6 @@ class TransaksiController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Transaksi $transaksi)
-    {
-        //
-    }
-
     public function status(Request $request)
     {
         $transaksi = Transaksi::findOrFail($request->input('id'));
@@ -130,32 +85,34 @@ class TransaksiController extends Controller
 
     function track (Request $request){
         $trans = DB::table('transaksi')
-                ->select('status')
+                ->select('status', 'picture', 'id')
                 ->where('token', $request->tok)
                 ->first();
-            return json_encode($trans);
+            if($trans === null){
+                return json_encode([
+                    'status' => 'null'
+                ]);
+            }else{
+                return json_encode($trans);
+            }
+    }
 
-        // switch($request->input('status')){
-        //     case 'SELESAI' :
-        //         DB::table('sampah')
-        //             ->where('id',$request->input('id_sampah'))
-        //             ->decrement('qty', $request->input('jumlah_sampah'));
-        //         $transaksi->status = $request->input('status');
-        //         if($transaksi->save()){
-        //             return response()->json([
-        //                 'message' => 'Delete Success'
-        //             ]);
-        //         }
-        //         break;
-        //     case 'EXPIRED' :
-        //         $transaksi->status = $request->input('status');
-        //         if($transaksi->save()){
-        //             return response()->json([
-        //                 'message' => 'Delete Success'
-        //             ]);
-        //         }
-        //         break;
-        // }
+    function update(Request $request){
+
+        $filenameWithExt = $request->file('picture')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('picture')->getClientOriginalExtension();
+        $fileNameToStore = time().'_'.$filename.'.'.$extension;
+        $path = $request->file('picture')->storeAs('public/transaksi', $fileNameToStore);
+
+        $transaksi = Transaksi::findOrFail($request->id);
+        $transaksi->picture = $fileNameToStore;
+
+        $transaksi->save();
+
+        return json_encode([
+            'message' => 'Success'
+        ]);
     }
 
 }

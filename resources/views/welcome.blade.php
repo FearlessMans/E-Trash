@@ -9,12 +9,13 @@
         </div>
         <div class="container">
             <form class="form-inline justify-content-center" id="Form" >
-                <p>
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                    <input class="form-control" type="text" name="tok" placeholder="Masukkan Token">
-                    <button class="btn btn-primary" id = "submit">Submit</button>
-                </p>
+                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                <input class="form-control" type="text" name="tok" placeholder="Masukkan Token">
+                <button class="btn btn-primary" id = "submit">Submit</button>
             </form>
+            <div class="text-center" id="hasil">
+
+            </div>
         </div>
         <div class="container" id="showing_case">
 
@@ -54,6 +55,22 @@
             </div>
         </div>
     </div>
+    <div class="container modal" id="result">
+        <div class="modal-header">
+            <h4 class="modal-title w-100 text-center">Silahkan upload bukti transfer</h4>
+        </div>
+        <div class="modal-body">
+            <form enctype="multipart/form-data" id="inputan">
+                {{ csrf_field() }}
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="picture">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" id="footer">
+        </div>
+    </div>
     <script>
     jQuery(document).ready(function(){
         jQuery('#submit').click(function(e){
@@ -72,13 +89,92 @@
                 processData: false,
                 contentType: false,
                 success: (response)=>{
-                    const data = JSON.parse(response);
-                    data.forEach(function(item){
-                        console.log(item.status)
-                    })
+                    const data = JSON.parse(response)
+                    if(data.status === "PENDING"){
+                        if(data.picture === null){
+                            HTML =
+                                '<p><b><small style="color:orange">Anda belum membayar dan data anda '+data.status+'</small></b></p>' +
+                                '<button class="btn btn-primary" onclick="update('+data.id+')">Update</button>'
+                                $('#hasil').append(HTML)
+                            setTimeout(function(){
+                                $('#hasil').html("")
+                            },6000)
+                        }else{
+                            HTML =
+                                '<p><b><small style="color:orange">Data anda lengkap dan dalam status '+data.status+'</small></b></p>'
+                                $('#hasil').append(HTML)
+                            setTimeout(function(){
+                                $('#hasil').html("")
+                            },3000)
+                        }
+                    }else if(data.status === "EXPIRED"){
+                        HTML =
+                        '<p><small style="color:red">'+data.status+'</small></p>'
+                        $('#hasil').append(HTML)
+                        setTimeout(function(){
+                            $('#hasil').html("")
+                        },3000)
+                    }else if(data.status === "SELESAI"){
+                        HTML =
+                        '<p><small style="color:green">'+data.status+'</small></p>'
+                        $('#hasil').append(HTML)
+                        setTimeout(function(){
+                            $('#hasil').html("")
+                        },3000)
+                    }else{
+                        HTML =
+                        '<p><small>Token Anda Salah!</small></p>'
+                        $('#hasil').append(HTML)
+                        setTimeout(function(){
+                            $('#hasil').html("")
+                        },3000)
+                    }
                 }
                 })
             })
+            $('#inputGroupFile01').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                fileName = fileName.substring(fileName.lastIndexOf("\\")+1, fileName.length);
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
         });
-</script>
+
+        function update(id){
+            $("#result #footer").append('<button class="btn btn-primary" onclick=updating('+id+')>Update</button>')
+            $("#result").modal({
+                fadeDuration: 250,
+                showClose: false,
+                showSpinner: true,
+                escapeClose: true,
+                clickClose: false
+            });
+        }
+
+        function updating(id){
+            // sessionStorage.clear();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            })
+            var form = document.getElementById('inputan');
+            var formData = new FormData(form);
+            formData.append('id', id);
+            $.ajax({
+                url: `/track/update`,
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    $("#result").modal('hide')
+                    setTimeout(function(){
+                        location.reload();
+                    },1000)
+                }
+            })
+        }
+    </script>
 @endsection
