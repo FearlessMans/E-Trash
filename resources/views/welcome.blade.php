@@ -101,7 +101,7 @@
                             },6000)
                         }else{
                             HTML =
-                                '<p><b><small style="color:orange">Data anda lengkap dan dalam status '+data.status+'</small></b></p>' +
+                                '<p><b><small style="color:orange">Data anda lengkap dan dalam status '+data.status+'</small></b></p>'
                                 $('#hasil').append(HTML)
                             setTimeout(function(){
                                 $('#hasil').html("")
@@ -169,8 +169,10 @@
                 processData: false,
                 contentType: false,
                 success: function(response){
-                    const data = JSON.parse(response)
-                    console.log(data)
+                    $("#result").modal('hide')
+                    setTimeout(function(){
+                        location.reload();
+                    },1000)
                 }
             })
         }
