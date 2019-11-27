@@ -97,4 +97,22 @@ class TransaksiController extends Controller
             }
     }
 
+    function update(Request $request){
+
+        $filenameWithExt = $request->file('picture')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('picture')->getClientOriginalExtension();
+        $fileNameToStore = time().'_'.$filename.'.'.$extension;
+        $path = $request->file('picture')->storeAs('public/transaksi', $fileNameToStore);
+
+        $transaksi = Transaksi::findOrFail($request->id);
+        $transaksi->picture = $fileNameToStore;
+
+        $transaksi->save();
+
+        return json_encode([
+            'message' => 'Success'
+        ]);
+    }
+
 }

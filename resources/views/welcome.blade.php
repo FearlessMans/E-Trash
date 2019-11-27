@@ -9,11 +9,9 @@
         </div>
         <div class="container">
             <form class="form-inline justify-content-center" id="Form" >
-                <p>
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                    <input class="form-control" type="text" name="tok" placeholder="Masukkan Token">
-                    <button class="btn btn-primary" id = "submit">Submit</button>
-                </p>
+                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                <input class="form-control" type="text" name="tok" placeholder="Masukkan Token">
+                <button class="btn btn-primary" id = "submit">Submit</button>
             </form>
             <div class="text-center" id="hasil">
 
@@ -62,12 +60,15 @@
             <h4 class="modal-title w-100 text-center">Silahkan upload bukti transfer</h4>
         </div>
         <div class="modal-body">
-            <form>
+            <form enctype="multipart/form-data" id="inputan">
+                {{ csrf_field() }}
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="inputGroupFile01" name="picture">
                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                 </div>
             </form>
+        </div>
+        <div class="modal-footer" id="footer">
         </div>
     </div>
     <script>
@@ -141,13 +142,37 @@
         });
 
         function update(id){
+            $("#result #footer").append('<button class="btn btn-primary" onclick=updating('+id+')>Update</button>')
             $("#result").modal({
                 fadeDuration: 250,
                 showClose: false,
                 showSpinner: true,
                 escapeClose: true,
-                clickClose: false,
+                clickClose: false
             });
+        }
+
+        function updating(id){
+            // sessionStorage.clear();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            })
+            var form = document.getElementById('inputan');
+            var formData = new FormData(form);
+            formData.append('id', id);
+            $.ajax({
+                url: `/track/update`,
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    const data = JSON.parse(response)
+                    console.log(data)
+                }
+            })
         }
     </script>
 @endsection
