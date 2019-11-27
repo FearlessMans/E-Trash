@@ -27,9 +27,10 @@
                     @foreach ($transaksi as $item)
                     <tr>
                         @if ($item->picture != null)
-                        <td><img src="{{asset('storage/transaksi/').$item->picture}}" alt="Transaksi"></td>
-                        @endif
+                        <td><img src="{{asset('/storage/transaksi').'/'.$item->picture}}" alt="Transaksi"  width = "75" height = "75"></td>
+                        @else
                         <td><p class="text-primary">Gambar Belum di Upload</p></td>
+                        @endif
                         <td>{{$item->email_pembeli}}</td>
                         <td>{{$item->jenis_sampah->nama_sampah}}</td>
                         <td><small>Rp.</small>{{$item->total_harga}}</td>
